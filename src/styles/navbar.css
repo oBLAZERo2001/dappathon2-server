@@ -1,0 +1,50 @@
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	padding: 30px 12px 8px 12px;
+	position: relative;
+	width: 100%;
+	max-width: 1240px;
+}
+
+.navbar .upload-button {
+	background-color: #4954fd;
+	color: white;
+	padding: 8px 16px;
+	border-radius: 4px;
+	font-weight: 600;
+	margin-right: 32px;
+	cursor: pointer;
+}
+
+.navbar .profile-icon {
+	padding: 8px;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	font-size: 18px;
+	border: 0.5px solid rgb(223, 223, 223);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #828488;
+}
+
+.navbar .navlist {
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	display: flex;
+    flex-direction: row;
+	align-items: center;
+	color: #828488;
+}
+
+.navbar .navlist p {
+	margin: 0px 4px;
+}
+
+.navbar .navlist p:hover {
+	text-decoration: underline;
+}

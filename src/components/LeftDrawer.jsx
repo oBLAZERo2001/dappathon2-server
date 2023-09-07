@@ -10,6 +10,8 @@ import {
 	AiOutlineLogout,
 	AiOutlineDollarCircle,
 	AiFillDollarCircle,
+	AiOutlineFileText,
+	AiFillFileText,
 } from "react-icons/ai";
 
 const drawerWidth = 260;
@@ -26,6 +28,12 @@ const mainList = [
 		i: () => <AiOutlineDollarCircle />,
 		ai: () => <AiFillDollarCircle />,
 		path: "/jobs",
+	},
+	{
+		text: "Files",
+		i: () => <AiOutlineFileText />,
+		ai: () => <AiFillFileText />,
+		path: "/files",
 	},
 	{
 		text: "Logout",
@@ -80,14 +88,13 @@ export function LeftDrawer({ smaller }) {
 	const navigate = useNavigate();
 	const [index, setIndex] = useState(0);
 
-
 	function updateIndex(path) {
 		switch (path.split("/")[1]) {
 			case "home":
 				return setIndex(0);
 			case "jobs":
 				return setIndex(1);
-			case "datasets":
+			case "files":
 				return setIndex(2);
 			case "models":
 				return setIndex(3);

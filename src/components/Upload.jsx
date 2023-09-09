@@ -15,7 +15,7 @@ export const Upload = ({ title, loggedInAddress }) => {
 	async function uploadFile() {
 		// if (!loggedInAddress || loggedInAddress === "")
 		// 	return toast("Please connect your wallet.", { type: "info" });
-		console.log(file);
+		// console.log(file);
 		if (!file) return toast("Please select a file!", { type: "info" });
 		if (!name || name === "")
 			return toast("Please enter a name for this dataset.", { type: "info" });

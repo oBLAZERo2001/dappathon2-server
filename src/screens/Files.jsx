@@ -3,6 +3,7 @@ import { Navbar } from "../components/Navbar";
 import { Box } from "@mui/material";
 import { LeftDrawer } from "../components/LeftDrawer";
 import { Upload } from "../components/Upload";
+import FileTable from "../components/FileTable";
 
 export default function Files() {
 	return (
@@ -14,6 +15,9 @@ export default function Files() {
 					<h2>Files 🏡</h2>
 					<br />
 					<Upload />
+				</Box>
+				<Box sx={{ p: 2 }}>
+					<FileTable />
 				</Box>
 			</Box>
 		</Box>

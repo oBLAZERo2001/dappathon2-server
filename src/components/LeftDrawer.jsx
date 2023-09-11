@@ -27,7 +27,7 @@ const mainList = [
 		text: "Your Tokens",
 		i: () => <AiOutlineDollarCircle />,
 		ai: () => <AiFillDollarCircle />,
-		path: "/jobs",
+		path: "/token",
 	},
 	{
 		text: "Files",

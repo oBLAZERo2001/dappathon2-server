@@ -45,16 +45,3 @@ export const getFiles = async function () {
 		console.log(error.message);
 	}
 };
-
-// export const searchDatasets = async function (name) {
-// 	try {
-// 		const response = await axios.get(
-// 			SERVER_URL + "/datasets/search?name=" + name
-// 		);
-// 		if (response.status === 200) {
-// 			return response.data.repositories;
-// 		}
-// 	} catch (error) {
-// 		console.log(error.message);
-// 	}
-// };

@@ -92,7 +92,7 @@ export function LeftDrawer({ smaller }) {
 		switch (path.split("/")[1]) {
 			case "home":
 				return setIndex(0);
-			case "jobs":
+			case "token":
 				return setIndex(1);
 			case "files":
 				return setIndex(2);

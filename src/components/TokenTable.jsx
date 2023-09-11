@@ -6,8 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { getFiles } from "../api/file";
-import { TablePagination } from "@mui/material";
+import { Box, TablePagination } from "@mui/material";
 
 function createData(name, calories, fat, carbs, protein) {
 	return { name, calories, fat, carbs, protein };
@@ -29,68 +28,26 @@ const columns = [
 		align: "center",
 	},
 	{
-		id: "description",
-		label: "Description",
+		id: "address",
+		label: "Contract Address",
 		// minWidth: 170,
 		align: "center",
 	},
 	{
-		id: "filename",
-		label: "Filename",
+		id: "addmembers",
+		label: "Add Members",
 		// minWidth: 170,
 		align: "center",
 	},
 	{
-		id: "contentType",
-		label: "Content Type",
-		// minWidth: 170,
-		align: "center",
-	},
-	{
-		id: "uploadId",
-		label: "uploadId",
-		// minWidth: 170,
-		align: "center",
-	},
-	{
-		id: "bucketId",
-		label: "bucketId",
-		// minWidth: 170,
-		align: "center",
-	},
-	{
-		id: "protocolLink",
-		label: "protocolLink",
-		// minWidth: 170,
-		align: "center",
-	},
-	{
-		id: "dynamicLinks",
-		label: "dynamicLinks",
-		// minWidth: 170,
-		align: "center",
-	},
-	{
-		id: "cid",
-		label: "cid",
+		id: "viewmembers",
+		label: "View Members",
 		// minWidth: 170,
 		align: "center",
 	},
 ];
 
-export default function TokenTable() {
-	const [files, setFiles] = React.useState();
-	React.useEffect(() => {
-		const fun = async () => {
-			const res = await getFiles();
-			console.log(res);
-			if (res.data) {
-				setFiles(res.data);
-			}
-		};
-		// fun();
-	}, []);
-
+export default function TokenTable({ data }) {
 	const [page, setPage] = React.useState(0);
 	const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -120,8 +77,8 @@ export default function TokenTable() {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{files?.length > 0 &&
-							files.map((row) => (
+						{data?.length > 0 &&
+							data.map((row) => (
 								<TableRow
 									key={row._id}
 									sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -130,9 +87,13 @@ export default function TokenTable() {
 										const value = row[column.id];
 										return (
 											<TableCell key={column.id} align={column.align}>
-												{column.format && typeof value === "number"
-													? column.format(value)
-													: value}
+												{column.id === "addmembers" ? (
+													<Box sx={{ cursor: "pointer" }}>add members</Box>
+												) : column.id === "viewmembers" ? (
+													<Box sx={{ cursor: "pointer" }}>view members</Box>
+												) : (
+													value
+												)}
 											</TableCell>
 										);
 									})}
@@ -144,7 +105,7 @@ export default function TokenTable() {
 			<TablePagination
 				rowsPerPageOptions={[10, 25, 100]}
 				component="div"
-				count={files?.length && files.length}
+				count={data?.length && data.length}
 				rowsPerPage={rowsPerPage}
 				page={page}
 				onPageChange={handleChangePage}

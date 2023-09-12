@@ -58,7 +58,7 @@ export const Navbar = ({ disableSearch = false }) => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					backgroundColor: "#256afe",
+					backgroundColor: "#4954FD",
 					color: "white",
 					width: "100%",
 					fontWeight: "500",

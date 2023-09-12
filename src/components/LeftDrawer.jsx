@@ -40,6 +40,10 @@ const mainList = [
 		i: () => <AiOutlineLogout />,
 		ai: () => <AiOutlineLogout />,
 		path: "/",
+		onClick: () => {
+			localStorage.clear();
+			window.location.replace("/");
+		},
 	},
 ];
 
@@ -127,6 +131,12 @@ export function LeftDrawer({ smaller }) {
 					flexDirection: "column",
 					height: "100%",
 					p: 3,
+					// bgcolor: "palegoldenrod",
+					// background: "#00416A" /* fallback for old browsers */,
+					// background:
+					// 	"-webkit-linear-gradient(to top, #E4E5E6, #00416A)" /* Chrome 10-25, Safari 5.1-6 */,
+					// background:
+					// 	"linear-gradient(to top, #E4E5E6, #00416A)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
 				}}
 			>
 				<Box>
@@ -136,10 +146,15 @@ export function LeftDrawer({ smaller }) {
 					</Box>
 					{/* Menu List */}
 					<Box>
-						{mainList.map(({ text, i, ai, path }, ind) => (
+						{mainList.map(({ text, i, ai, path, onClick }, ind) => (
 							<Box
 								key={text}
-								onClick={() => navigate(path)}
+								onClick={() => {
+									if (onClick) {
+										onClick();
+									}
+									navigate(path);
+								}}
 								sx={{
 									backgroundColor: index === ind ? "#4954FD" : "",
 									borderRadius: "8px",

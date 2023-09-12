@@ -14,6 +14,7 @@ import { Navbar } from "../components/Navbar";
 import TokenTable from "../components/TokenTable";
 import { cloneContract } from "../utils/contract";
 import { addToken, getTokens } from "../api/token";
+import { AiOutlinePlus } from "react-icons/ai";
 
 export default function Token() {
 	const [loading, setLoading] = useState(false);
@@ -51,22 +52,24 @@ export default function Token() {
 						<h2>Accout keys 🏡</h2>
 
 						{loading ? (
-							<Button color="primary" variant="contained" sx={{ ml: 3 }}>
+							<Button color="secondary" variant="contained" sx={{ ml: 3 }}>
 								Loading...
 							</Button>
 						) : (
 							<Button
 								onClick={handleClickOpen}
 								variant="contained"
-								color="primary"
+								color="secondary"
 								sx={{ ml: 3 }}
+								startIcon={<AiOutlinePlus />}
 							>
 								Add New Token
 							</Button>
 						)}
 					</Box>
-					<br />
-					<TokenTable data={tokens} />
+					<Box sx={{ p: 2, mt: 2 }}>
+						<TokenTable data={tokens} />
+					</Box>
 				</Box>
 			</Box>
 			<SimpleDialog

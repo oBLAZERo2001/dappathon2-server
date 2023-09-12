@@ -1,21 +1,28 @@
-import { Box, CircularProgress, TextField } from "@mui/material";
-import React, { useState } from "react";
+import {
+	Box,
+	CircularProgress,
+	FormControl,
+	InputLabel,
+	MenuItem,
+	Select,
+	TextField,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import { uploadFileApi } from "../api/file";
+import { getTokens } from "../api/token";
 
-export const Upload = ({ title, loggedInAddress }) => {
+export const Upload = () => {
 	const [uploadLoading, setUploadLoading] = useState(false);
 	const [file, setFile] = useState();
 	const [description, setDescription] = useState("");
 	const [name, setName] = useState("");
-	const navigate = useNavigate();
+	const [accessAdd, setAccessAdd] = useState([]);
+
+	const [tokens, setTokens] = useState([]);
 
 	async function uploadFile() {
-		// if (!loggedInAddress || loggedInAddress === "")
-		// 	return toast("Please connect your wallet.", { type: "info" });
-		// console.log(file);
 		if (!file) return toast("Please select a file!", { type: "info" });
 		if (!name || name === "")
 			return toast("Please enter a name for this dataset.", { type: "info" });
@@ -26,9 +33,20 @@ export const Upload = ({ title, loggedInAddress }) => {
 		setUploadLoading(true);
 		await uploadFileApi(file, name, description);
 		toast("Successfully uploaded your dataset", { type: "success" });
-		// navigate("/jobs");
 		setUploadLoading(false);
 	}
+
+	const getTokensFun = async () => {
+		const res = await getTokens();
+		if (!res.error) {
+			setTokens(res.data?.tokens);
+		}
+		return;
+	};
+
+	useEffect(() => {
+		getTokensFun();
+	}, []);
 
 	return (
 		<Box
@@ -57,13 +75,14 @@ export const Upload = ({ title, loggedInAddress }) => {
 						type="file"
 						name="file"
 						id="file"
-						multiple
+						// multiple
 						onChange={(e) => setFile(e.target.files)}
 					/>
 				</Box>
 				<Box sx={{ mt: 1, mb: 2 }}>
 					<TextField
-						placeholder="Enter dataset name"
+						// placeholder="Enter custom file name"
+						label="Enter custom file name"
 						size="small"
 						value={name}
 						onChange={(e) => {
@@ -77,11 +96,48 @@ export const Upload = ({ title, loggedInAddress }) => {
 								border: "1px solid white",
 							},
 						}}
+						variant="outlined"
 					/>
+
+					<FormControl
+						fullWidth
+						sx={{
+							mt: 2,
+						}}
+						size="small"
+					>
+						<InputLabel id="demo-simple-select-label">
+							Choose who can access this
+						</InputLabel>
+						<Select
+							labelId="demo-simple-select-label"
+							id="demo-simple-select"
+							// value={age}
+							label="Choose who can access this"
+							// onChange={handleChange}
+						>
+							{tokens?.length > 0 &&
+								tokens.map((t) => (
+									<MenuItem key={t._id} value={t.address}>
+										{t.name}{" "}
+										<i
+											style={{
+												fontSize: "12px",
+												marginLeft: "10px",
+											}}
+										>
+											({t.address})
+										</i>
+									</MenuItem>
+								))}
+						</Select>
+					</FormControl>
+
 					<TextField
 						multiline
 						rows={4}
-						placeholder="Enter description"
+						// placeholder="Enter description"
+						label="Enter description"
 						size="small"
 						value={description}
 						onChange={(e) => {

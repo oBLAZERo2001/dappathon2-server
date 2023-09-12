@@ -1,4 +1,3 @@
-import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,6 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { getFiles } from "../api/file";
 import { TablePagination } from "@mui/material";
+import { useEffect, useState } from "react";
 
 function createData(name, calories, fat, carbs, protein) {
 	return { name, calories, fat, carbs, protein };
@@ -79,8 +79,8 @@ const columns = [
 ];
 
 export default function FileTable() {
-	const [files, setFiles] = React.useState();
-	React.useEffect(() => {
+	const [files, setFiles] = useState();
+	useEffect(() => {
 		const fun = async () => {
 			const res = await getFiles();
 			console.log(res);
@@ -91,8 +91,8 @@ export default function FileTable() {
 		fun();
 	}, []);
 
-	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(10);
+	const [page, setPage] = useState(0);
+	const [rowsPerPage, setRowsPerPage] = useState(10);
 
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage);
@@ -123,6 +123,7 @@ export default function FileTable() {
 						{files?.length > 0 &&
 							files.map((row) => (
 								<TableRow
+									hover
 									key={row._id}
 									sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 								>

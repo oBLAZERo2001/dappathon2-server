@@ -17,7 +17,7 @@ import { addToken, getTokens } from "../api/token";
 
 export default function Token() {
 	const [loading, setLoading] = useState(false);
-	const [tokens, setTokens] = useState(false);
+	const [tokens, setTokens] = useState([]);
 	const [open, setOpen] = React.useState(false);
 
 	const handleClickOpen = () => {
@@ -45,12 +45,13 @@ export default function Token() {
 						sx={{
 							display: "flex",
 							alignItems: "center",
-							justifyContent: "space-between",
+							// justifyContent: "space-between",
 						}}
 					>
 						<h2>Accout keys 🏡</h2>
+
 						{loading ? (
-							<Button color="primary" variant="contained">
+							<Button color="primary" variant="contained" sx={{ ml: 3 }}>
 								Loading...
 							</Button>
 						) : (
@@ -58,6 +59,7 @@ export default function Token() {
 								onClick={handleClickOpen}
 								variant="contained"
 								color="primary"
+								sx={{ ml: 3 }}
 							>
 								Add New Token
 							</Button>
@@ -96,10 +98,11 @@ const SimpleDialog = ({ open, setOpen, setLoading, loading, getTokensFun }) => {
 				const responce = await addToken(res.contractAddress, name);
 				if (responce) {
 					console.log(responce);
-					await getTokensFun();
 				}
 			}
+			setName("");
 			handleClose();
+			getTokensFun();
 		} catch (err) {
 			console.log("Error: " + err);
 			setLoading(false);

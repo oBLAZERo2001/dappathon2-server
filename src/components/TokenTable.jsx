@@ -1,4 +1,3 @@
-import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,6 +6,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Box, TablePagination } from "@mui/material";
+import { AddMembersDialog } from "./AddMembersDialog";
+import { useState } from "react";
 
 function createData(name, calories, fat, carbs, protein) {
 	return { name, calories, fat, carbs, protein };
@@ -48,8 +49,10 @@ const columns = [
 ];
 
 export default function TokenTable({ data }) {
-	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(10);
+	const [page, setPage] = useState(0);
+	const [rowsPerPage, setRowsPerPage] = useState(10);
+	const [open, setOpen] = useState(false);
+	const [addMemberState, setAddMemberState] = useState(false);
 
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage);
@@ -80,6 +83,7 @@ export default function TokenTable({ data }) {
 						{data?.length > 0 &&
 							data.map((row) => (
 								<TableRow
+									hover
 									key={row._id}
 									sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 								>
@@ -88,7 +92,15 @@ export default function TokenTable({ data }) {
 										return (
 											<TableCell key={column.id} align={column.align}>
 												{column.id === "addmembers" ? (
-													<Box sx={{ cursor: "pointer" }}>add members</Box>
+													<Box
+														sx={{ cursor: "pointer" }}
+														onClick={() => {
+															setOpen(true);
+															setAddMemberState(row);
+														}}
+													>
+														add members
+													</Box>
 												) : column.id === "viewmembers" ? (
 													<Box sx={{ cursor: "pointer" }}>view members</Box>
 												) : (
@@ -110,6 +122,11 @@ export default function TokenTable({ data }) {
 				page={page}
 				onPageChange={handleChangePage}
 				onRowsPerPageChange={handleChangeRowsPerPage}
+			/>
+			<AddMembersDialog
+				open={open}
+				setOpen={setOpen}
+				addMemberState={addMemberState}
 			/>
 		</Paper>
 	);

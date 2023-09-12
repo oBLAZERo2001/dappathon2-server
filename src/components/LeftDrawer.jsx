@@ -39,7 +39,7 @@ const mainList = [
 		text: "Logout",
 		i: () => <AiOutlineLogout />,
 		ai: () => <AiOutlineLogout />,
-		path: "/datasets",
+		path: "/",
 	},
 ];
 

@@ -45,3 +45,19 @@ export const getFiles = async function () {
 		console.log(error.message);
 	}
 };
+
+export const downloadFile = async (id, name) => {
+	try {
+		const response = await fetch(`${SERVER_URL}/file/download/${id}`); // Replace with your server URL
+		const blob = await response.blob();
+		const url = window.URL.createObjectURL(blob);
+		const a = document.createElement("a");
+		a.href = url;
+		a.download = name;
+		document.body.appendChild(a);
+		a.click();
+		window.URL.revokeObjectURL(url);
+	} catch (error) {
+		console.error("Error downloading file:", error);
+	}
+};

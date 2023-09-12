@@ -5,8 +5,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { getFiles } from "../api/file";
-import { TablePagination } from "@mui/material";
+import { downloadFile, getFiles } from "../api/file";
+import { Box, TablePagination } from "@mui/material";
 import { useEffect, useState } from "react";
 
 function createData(name, calories, fat, carbs, protein) {
@@ -76,6 +76,12 @@ const columns = [
 		// minWidth: 170,
 		align: "center",
 	},
+	{
+		id: "download",
+		label: "download",
+		// minWidth: 170,
+		align: "center",
+	},
 ];
 
 export default function FileTable() {
@@ -131,9 +137,20 @@ export default function FileTable() {
 										const value = row[column.id];
 										return (
 											<TableCell key={column.id} align={column.align}>
-												{column.format && typeof value === "number"
-													? column.format(value)
-													: value}
+												{column.id === "download" ? (
+													<Box
+														onClick={() => {
+															downloadFile(row._id, row.name);
+														}}
+														sx={{
+															cursor: "pointer",
+														}}
+													>
+														{column.id}
+													</Box>
+												) : (
+													value
+												)}
 											</TableCell>
 										);
 									})}

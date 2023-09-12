@@ -18,7 +18,7 @@ export const Upload = () => {
 	const [file, setFile] = useState();
 	const [description, setDescription] = useState("");
 	const [name, setName] = useState("");
-	const [accessAdd, setAccessAdd] = useState([]);
+	const [accessAdd, setAccessAdd] = useState("");
 
 	const [tokens, setTokens] = useState([]);
 
@@ -31,7 +31,7 @@ export const Upload = () => {
 				type: "info",
 			});
 		setUploadLoading(true);
-		await uploadFileApi(file, name, description);
+		await uploadFileApi(file, name, description, accessAdd);
 		toast("Successfully uploaded your dataset", { type: "success" });
 		setUploadLoading(false);
 	}
@@ -112,9 +112,11 @@ export const Upload = () => {
 						<Select
 							labelId="demo-simple-select-label"
 							id="demo-simple-select"
-							// value={age}
 							label="Choose who can access this"
-							// onChange={handleChange}
+							value={accessAdd}
+							onChange={(e) => {
+								setAccessAdd(e.target.value);
+							}}
 						>
 							{tokens?.length > 0 &&
 								tokens.map((t) => (

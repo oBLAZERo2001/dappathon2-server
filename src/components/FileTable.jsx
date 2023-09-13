@@ -84,19 +84,7 @@ const columns = [
 	},
 ];
 
-export default function FileTable() {
-	const [files, setFiles] = useState();
-	useEffect(() => {
-		const fun = async () => {
-			const res = await getFiles();
-			console.log(res);
-			if (res.data) {
-				setFiles(res.data);
-			}
-		};
-		fun();
-	}, []);
-
+export default function FileTable({ files }) {
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -127,35 +115,37 @@ export default function FileTable() {
 					</TableHead>
 					<TableBody>
 						{files?.length > 0 &&
-							files.map((row) => (
-								<TableRow
-									hover
-									key={row._id}
-									sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-								>
-									{columns.map((column) => {
-										const value = row[column.id];
-										return (
-											<TableCell key={column.id} align={column.align}>
-												{column.id === "download" ? (
-													<Box
-														onClick={() => {
-															downloadFile(row._id, row.name);
-														}}
-														sx={{
-															cursor: "pointer",
-														}}
-													>
-														{column.id}
-													</Box>
-												) : (
-													value
-												)}
-											</TableCell>
-										);
-									})}
-								</TableRow>
-							))}
+							files
+								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+								.map((row) => (
+									<TableRow
+										hover
+										key={row._id}
+										sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+									>
+										{columns.map((column) => {
+											const value = row[column.id];
+											return (
+												<TableCell key={column.id} align={column.align}>
+													{column.id === "download" ? (
+														<Box
+															onClick={() => {
+																downloadFile(row._id, row.name);
+															}}
+															sx={{
+																cursor: "pointer",
+															}}
+														>
+															{column.id}
+														</Box>
+													) : (
+														value
+													)}
+												</TableCell>
+											);
+										})}
+									</TableRow>
+								))}
 					</TableBody>
 				</Table>
 			</TableContainer>

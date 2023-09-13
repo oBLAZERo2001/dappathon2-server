@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import { uploadFileApi } from "../api/file";
 import { getTokens } from "../api/token";
 
-export const Upload = () => {
+export const Upload = ({ fun, handleClose }) => {
 	const [uploadLoading, setUploadLoading] = useState(false);
 	const [file, setFile] = useState();
 	const [description, setDescription] = useState("");
@@ -25,14 +25,16 @@ export const Upload = () => {
 	async function uploadFile() {
 		if (!file) return toast("Please select a file!", { type: "info" });
 		if (!name || name === "")
-			return toast("Please enter a name for this dataset.", { type: "info" });
+			return toast("Please enter a name for this file.", { type: "info" });
 		if (!description || description === "")
-			return toast("Please enter a description for this dataset.", {
+			return toast("Please enter a description for this file.", {
 				type: "info",
 			});
 		setUploadLoading(true);
 		await uploadFileApi(file, name, description, accessAdd);
-		toast("Successfully uploaded your dataset", { type: "success" });
+		toast("Successfully uploaded your file", { type: "success" });
+		fun();
+		handleClose();
 		setUploadLoading(false);
 	}
 

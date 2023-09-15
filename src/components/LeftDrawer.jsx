@@ -36,6 +36,12 @@ const mainList = [
 		path: "/files",
 	},
 	{
+		text: "Crypter",
+		i: () => <AiOutlineFileText />,
+		ai: () => <AiFillFileText />,
+		path: "/crypter",
+	},
+	{
 		text: "Logout",
 		i: () => <AiOutlineLogout />,
 		ai: () => <AiOutlineLogout />,
@@ -100,7 +106,7 @@ export function LeftDrawer({ smaller }) {
 				return setIndex(1);
 			case "files":
 				return setIndex(2);
-			case "models":
+			case "crypter":
 				return setIndex(3);
 			case "marketplace":
 				return setIndex(4);

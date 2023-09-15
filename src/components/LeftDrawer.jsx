@@ -17,10 +17,16 @@ import {
 const drawerWidth = 260;
 
 const mainList = [
+	// {
+	// 	text: "Home",
+	// 	i: () => <AiOutlineHome />,
+	// 	ai: () => <AiFillHome />,
+	// 	path: "/",
+	// },
 	{
-		text: "Home",
-		i: () => <AiOutlineHome />,
-		ai: () => <AiFillHome />,
+		text: "Files",
+		i: () => <AiOutlineFileText />,
+		ai: () => <AiFillFileText />,
 		path: "/",
 	},
 	{
@@ -28,12 +34,6 @@ const mainList = [
 		i: () => <AiOutlineDollarCircle />,
 		ai: () => <AiFillDollarCircle />,
 		path: "/token",
-	},
-	{
-		text: "Files",
-		i: () => <AiOutlineFileText />,
-		ai: () => <AiFillFileText />,
-		path: "/files",
 	},
 	{
 		text: "Crypter",
@@ -100,14 +100,14 @@ export function LeftDrawer({ smaller }) {
 
 	function updateIndex(path) {
 		switch (path.split("/")[1]) {
-			case "home":
+			// case "home":
+			// 	return setIndex(0);
+			case "files":
 				return setIndex(0);
 			case "token":
 				return setIndex(1);
-			case "files":
-				return setIndex(2);
 			case "crypter":
-				return setIndex(3);
+				return setIndex(2);
 			case "marketplace":
 				return setIndex(4);
 			case "explorer":
@@ -148,7 +148,7 @@ export function LeftDrawer({ smaller }) {
 				<Box>
 					{/* Logo */}
 					<Box sx={{ mb: 6, display: "flex", alignItems: "center" }}>
-						<h2 style={{ paddingTop: "8px" }}>Crypto Scape💱</h2>
+						<h2 style={{ paddingTop: "8px" }}>File Scape💱</h2>
 					</Box>
 					{/* Menu List */}
 					<Box>

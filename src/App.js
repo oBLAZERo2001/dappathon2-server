@@ -11,8 +11,8 @@ function App() {
 	return (
 		<Router>
 			<Routes>
-				<Route path="/" exact element={<Home />} />
-				<Route path="/files" exact element={<Files />} />
+				{/* <Route path="/" exact element={<Home />} /> */}
+				<Route path="/" exact element={<Files />} />
 				<Route path="/crypter" exact element={<Cryptr />} />
 				<Route path="/token" exact element={<Token />} />
 				<Route path="/test" exact element={<Test />} />

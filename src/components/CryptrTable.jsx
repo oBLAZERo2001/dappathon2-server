@@ -5,7 +5,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { downloadFile, getFiles } from "../api/file";
+import { downloadFile, getFiles } from "../api/cryptr";
 import { Box, TablePagination } from "@mui/material";
 import { useEffect, useState } from "react";
 

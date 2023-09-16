@@ -49,8 +49,7 @@ export default function Welcome() {
 							ml: "20px",
 							fontWeight: "bold",
 
-							fontFamily: `'Merriweather', serif`,
-							// font-family: 'Poppins', sans-serif;
+							fontFamily: `'Montserrat', sans-serif`,
 						}}
 					>
 						Encrypted easer, simple & <br /> uniquely share files.
@@ -67,6 +66,7 @@ export default function Welcome() {
 							justifyContent: "center",
 							color: "white",
 
+							fontFamily: `'Montserrat', sans-serif`,
 							fontSize: "2em",
 							fontWeight: "bold",
 							"&:hover": {

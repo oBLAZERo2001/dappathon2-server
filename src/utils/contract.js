@@ -1,7 +1,7 @@
 import { deploy } from "@bunzz/deploy-sdk";
 import { providers } from "ethers";
 
-const TEMPLATE_ID = "1d878660-95cf-438f-aeb9-70e9ecd03c3b";
+const TEMPLATE_ID = "2e83a405-320a-4889-8768-fe1e764af258";
 
 export const cloneContract = async () => {
 	// get a Signer object in the ethers' style.
@@ -9,7 +9,7 @@ export const cloneContract = async () => {
 
 	// Arguments for the constructor as an array.
 	// The types must follow the ethers style.
-	const arg = ["Test Deploy", "TD", "https://ipfs.io/ipfs/"];
+	const arg = [];
 
 	// The return value is the same as the ethers one.
 	const tx = await deploy(TEMPLATE_ID, signer, arg);

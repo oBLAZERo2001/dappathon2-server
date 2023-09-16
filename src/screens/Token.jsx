@@ -15,6 +15,7 @@ import TokenTable from "../components/TokenTable";
 import { cloneContract } from "../utils/contract";
 import { addToken, getTokens } from "../api/token";
 import { AiOutlinePlus } from "react-icons/ai";
+import { switchChain } from "../utils/wallet";
 
 export default function Token() {
 	const [loading, setLoading] = useState(false);
@@ -66,6 +67,15 @@ export default function Token() {
 								Add New Token
 							</Button>
 						)}
+
+						<Box
+							sx={{
+								fontSize: "12px",
+								ml: 2,
+							}}
+						>
+							<i>Powered by BUNZZ Tokens</i>
+						</Box>
 					</Box>
 					<Box sx={{ p: 2, mt: 2 }}>
 						<TokenTable data={tokens} />
@@ -91,8 +101,10 @@ const SimpleDialog = ({ open, setOpen, setLoading, loading, getTokensFun }) => {
 	};
 
 	const handleAddNewToken = async () => {
-		setLoading(true);
 		try {
+			setLoading(true);
+
+			await switchChain();
 			const res = await cloneContract();
 			console.log(res);
 			setLoading(false);

@@ -9,7 +9,11 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 
-export const AddMembersDialog = ({ open, setOpen, addMemberState }) => {
+import ERC721Interface from "../contracts/ERC721.json";
+import Web3 from "web3";
+import { getWalletAddress } from "../utils/wallet";
+
+export const AddMembersDialog = ({ open, setOpen, addMemberState, token }) => {
 	const [name, setName] = useState("");
 	const [loading, setLoading] = useState(false);
 
@@ -21,7 +25,34 @@ export const AddMembersDialog = ({ open, setOpen, addMemberState }) => {
 		setOpen(false);
 	};
 
-	const handleAddMembers = async () => {};
+	const handleAddMembers = async () => {
+		try {
+			setLoading(true);
+			const address = name;
+			const web3 = new Web3(window.ethereum);
+			const contract = new web3.eth.Contract(ERC721Interface.abi, token);
+
+			const currentAddress = await getWalletAddress();
+
+			// Gas Calculation
+			const gasPrice = await web3.eth.getGasPrice();
+			const gas = await contract.methods.safeMint(address).estimateGas({
+				from: currentAddress,
+			});
+			await contract.methods
+				.safeMint(address)
+				.send({ from: currentAddress, gasPrice, gas })
+				.on("receipt", async function (receipt) {
+					setLoading(false);
+					handleClose();
+					setName();
+					alert("Succesfully added new member🥳🍾");
+				});
+			setLoading(false);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	return (
 		<div>
 			<Dialog open={open} onClose={handleClose}>
@@ -31,7 +62,7 @@ export const AddMembersDialog = ({ open, setOpen, addMemberState }) => {
 				<DialogContent>
 					<TextField
 						label="Wallet Address"
-						name="name"
+						name="Wallet Address"
 						value={name}
 						onChange={(e) => {
 							setName(e.target.value);

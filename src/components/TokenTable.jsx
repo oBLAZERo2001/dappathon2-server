@@ -50,6 +50,7 @@ const columns = [
 
 export default function TokenTable({ data }) {
 	const [page, setPage] = useState(0);
+	const [token, setToken] = useState("");
 	const [rowsPerPage, setRowsPerPage] = useState(10);
 	const [open, setOpen] = useState(false);
 	const [addMemberState, setAddMemberState] = useState(false);
@@ -95,6 +96,7 @@ export default function TokenTable({ data }) {
 													<Box
 														sx={{ cursor: "pointer" }}
 														onClick={() => {
+															setToken(row.address);
 															setOpen(true);
 															setAddMemberState(row);
 														}}
@@ -102,7 +104,17 @@ export default function TokenTable({ data }) {
 														add members
 													</Box>
 												) : column.id === "viewmembers" ? (
-													<Box sx={{ cursor: "pointer" }}>view members</Box>
+													<Box
+														sx={{ cursor: "pointer" }}
+														onClick={() => {
+															window.open(
+																`https://mumbai.polygonscan.com/token/${row.address}#balances`,
+																"_blank"
+															);
+														}}
+													>
+														view members
+													</Box>
 												) : (
 													value
 												)}
@@ -127,6 +139,7 @@ export default function TokenTable({ data }) {
 				open={open}
 				setOpen={setOpen}
 				addMemberState={addMemberState}
+				token={token}
 			/>
 		</Paper>
 	);

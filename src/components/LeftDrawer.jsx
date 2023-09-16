@@ -147,8 +147,20 @@ export function LeftDrawer({ smaller }) {
 			>
 				<Box>
 					{/* Logo */}
-					<Box sx={{ mb: 6, display: "flex", alignItems: "center" }}>
-						<h2 style={{ paddingTop: "8px" }}>File Scape💱</h2>
+					<Box
+						sx={{
+							mb: 6,
+							display: "flex",
+							alignItems: "center",
+
+							display: "flex",
+							alignItems: "center",
+						}}
+					>
+						<img src="/images/fileScapIcon.png" width="50px" />
+						<h2 style={{ paddingTop: "8px" }}>File Scape</h2>
+
+						{/* <img src="/images/fileScapLogo.png" width="200px" /> */}
 					</Box>
 					{/* Menu List */}
 					<Box>

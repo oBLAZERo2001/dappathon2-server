@@ -6,6 +6,7 @@ import Files from "./screens/Files";
 import Token from "./screens/Token";
 import Test from "./screens/Test";
 import Cryptr from "./screens/Cryptr";
+import Welcome from "./screens/Welcome";
 
 function App() {
 	return (
@@ -13,6 +14,7 @@ function App() {
 			<Routes>
 				{/* <Route path="/" exact element={<Home />} /> */}
 				<Route path="/" exact element={<Files />} />
+				<Route path="/welcome" exact element={<Welcome />} />
 				<Route path="/crypter" exact element={<Cryptr />} />
 				<Route path="/token" exact element={<Token />} />
 				<Route path="/test" exact element={<Test />} />

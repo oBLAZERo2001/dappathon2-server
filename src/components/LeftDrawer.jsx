@@ -30,7 +30,7 @@ const mainList = [
 		path: "/",
 	},
 	{
-		text: "Your Tokens",
+		text: "Access Tokens",
 		i: () => <AiOutlineDollarCircle />,
 		ai: () => <AiFillDollarCircle />,
 		path: "/token",

@@ -21,11 +21,11 @@ export const uploadFileApi = async function (files, name, description) {
 				Authorization: `Bearer ${token}`,
 			},
 		});
-		if (response.status === 200) {
+		if (response?.status === 200) {
 			return response.data;
 		}
 	} catch (error) {
-		console.log(error.message);
+		console.log(error?.message);
 	}
 };
 
@@ -48,7 +48,13 @@ export const getFiles = async function () {
 
 export const downloadFile = async (id, name) => {
 	try {
-		const response = await fetch(`${SERVER_URL}/cryptr/download/${id}`); // Replace with your server URL
+		let token = localStorage.getItem("token");
+
+		const response = await fetch(`${SERVER_URL}/cryptr/download/${id}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		}); // Replace with your server URL
 		const blob = await response.blob();
 		const url = window.URL.createObjectURL(blob);
 		const a = document.createElement("a");

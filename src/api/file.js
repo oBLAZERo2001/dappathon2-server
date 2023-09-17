@@ -48,7 +48,17 @@ export const getFiles = async function () {
 
 export const downloadFile = async (id, name) => {
 	try {
-		const response = await fetch(`${SERVER_URL}/file/download/${id}`); // Replace with your server URL
+		let token = localStorage.getItem("token");
+
+		const response = await fetch(
+			`${SERVER_URL}/file/download/${id}`,
+
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}
+		); // Replace with your server URL
 		const blob = await response.blob();
 		const url = window.URL.createObjectURL(blob);
 		const a = document.createElement("a");

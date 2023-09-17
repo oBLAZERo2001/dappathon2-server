@@ -55,7 +55,7 @@ export const AddMembersDialog = ({ open, setOpen, addMemberState, token }) => {
 	};
 	return (
 		<div>
-			<Dialog open={open} onClose={handleClose}>
+			<Dialog open={open} onClose={() => {}}>
 				<DialogTitle>
 					{"Add Members"} {addMemberState?.name && `to ${addMemberState.name}`}
 				</DialogTitle>

@@ -50,7 +50,7 @@ export default function Token() {
 							// justifyContent: "space-between",
 						}}
 					>
-						<h2>Accout keys 🏡</h2>
+						<h2>Access Tokens 🏡</h2>
 
 						{loading ? (
 							<Button color="secondary" variant="contained" sx={{ ml: 3 }}>
@@ -74,7 +74,7 @@ export default function Token() {
 								ml: 2,
 							}}
 						>
-							<i>Powered by BUNZZ Tokens</i>
+							<i>Powered by BUNZZ Protocol</i>
 						</Box>
 					</Box>
 					<Box sx={{ p: 2, mt: 2 }}>
@@ -127,7 +127,7 @@ const SimpleDialog = ({ open, setOpen, setLoading, loading, getTokensFun }) => {
 		<div>
 			<Dialog
 				open={open}
-				onClose={handleClose}
+				onClose={() => {}}
 				aria-labelledby="responsive-dialog-title"
 			>
 				<DialogTitle id="responsive-dialog-title">

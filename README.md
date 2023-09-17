@@ -2,7 +2,9 @@
 
 Discover Files Scape, the cutting-edge solution for online file management, offering unrivaled security and accessibility. We combine the strength of cryptic encryption with the resilience of IPFS/Filecoin to redefine your digital world.
 
-![Home Page](https://i.ibb.co/5vk1Q77/image-6.png)
+![Home Page](https://i.ibb.co/SrMVx37/file-scape-welcome.png)
+
+🎥 **Demo**: [Demo Files Scape](https://www.youtube.com/watch?v=6_nBqpO9-kU)
 
 🌐 **Website**: [Explore Files Scape](https://filescape.xyz/welcome)
 
